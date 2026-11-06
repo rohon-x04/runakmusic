@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090313"><title>RUNAK MUSIC</title>
+<style>
+:root{--bg:#090313;--glass:rgba(18,7,35,.76);--stroke:rgba(196,117,255,.38);--purple:#a020ff;--pink:#e44cff;--text:#fff8ff;--muted:#c5b2db}
+*{box-sizing:border-box}body{margin:0;color:var(--text);font-family:Inter,Arial,sans-serif;background:radial-gradient(ellipse at 70% 0%,#2c0750 0%,#10051e 45%,#07020d 100%);min-height:100vh;padding-bottom:82px}
+button,input{font:inherit}button{color:inherit;cursor:pointer}
+.app{display:grid;grid-template-columns:154px minmax(0,1fr);min-height:100vh}
+.sidebar{height:calc(100vh - 82px);position:sticky;top:0;background:rgba(8,3,17,.88);border-right:1px solid #8d35d655;backdrop-filter:blur(18px);padding:16px 10px;display:flex;flex-direction:column;gap:17px;z-index:5}
+.brand{display:flex;align-items:center;justify-content:center;gap:7px;color:#f0c7ff;font-weight:900;font-style:italic;font-size:17px;text-shadow:0 0 15px #d000ff;line-height:1.05;padding:4px 0 13px}.brand-icon{font-size:28px;color:#b52cff}
+.nav,.playlist{display:grid;gap:4px}.nav button,.playlist button{border:0;background:transparent;text-align:left;padding:9px 10px;border-radius:20px;font-size:12px;color:#eee2fa;display:flex;gap:10px;align-items:center}.nav button.active,.nav button:hover{background:linear-gradient(100deg,#9d12ff,#411078);box-shadow:0 0 16px #9d12ff88}.nav .ico{font-size:17px;width:17px;text-align:center}.label{font-size:10px;color:#aa8ec4;margin:3px 8px 2px}.playlist button{padding:7px 8px}.playlist button:hover{background:#8d22c933}.premium{margin-top:auto;border:1px solid var(--stroke);border-radius:15px;padding:10px;background:linear-gradient(145deg,#32105caa,#120620dd);font-size:10px;color:var(--muted)}.premium strong{display:block;color:white;font-size:11px;margin-bottom:4px}.premium button{margin-top:7px;background:linear-gradient(90deg,#7d19f7,#ce24ef);border:0;border-radius:15px;padding:6px 12px;font-size:10px}
+main{min-width:0;padding:12px 14px 30px}.topbar{height:42px;display:flex;align-items:center;gap:10px;margin-bottom:12px}.search{height:38px;display:flex;align-items:center;gap:9px;padding:0 14px;border:1px solid var(--stroke);border-radius:30px;background:#10071cbb;max-width:450px;flex:1;box-shadow:0 0 15px #a020ff22}.search input{min-width:0;width:100%;border:0;outline:0;background:transparent;color:white;font-size:11px}.search input::placeholder{color:#a48db9}.top-right{margin-left:auto;display:flex;gap:9px}.circle{width:34px;height:34px;border-radius:50%;border:1px solid var(--stroke);background:#180a2b;color:white}
+.hero-row{position:relative;min-height:270px;display:grid;grid-template-columns:minmax(0,1fr) 165px;gap:10px}.hero{border:1px solid #a842ed66;border-radius:17px;overflow:hidden;position:relative;background:#10051d url('assets/anime-hero.jpg') center 42%/cover no-repeat;box-shadow:0 0 26px #9e22e733}.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,2,18,.9),rgba(9,2,20,.48) 57%,rgba(9,2,20,.08))}.hero-content{position:relative;padding:48px 26px;max-width:520px}.welcome{font-size:12px;color:#d65cff;letter-spacing:1px}.hero h1{font-size:clamp(40px,6vw,66px);letter-spacing:-3px;line-height:.95;margin:12px 0 13px;font-weight:950;font-style:italic;text-shadow:0 0 20px #d02cff99}.hero h1 span{color:#b622ff}.tagline{font-size:16px;color:#f2e5ff}.hero-actions{display:flex;gap:10px;margin-top:25px}.primary,.outline{border-radius:24px;padding:10px 19px;font-size:12px;font-weight:750}.primary{border:0;background:linear-gradient(100deg,#8500f7,#d000ff);box-shadow:0 0 20px #b000ff99}.outline{background:#150726bb;border:1px solid #c14bff;color:white}
+.queue{border:1px solid var(--stroke);border-radius:16px;background:rgba(12,4,24,.78);backdrop-filter:blur(18px);padding:12px 9px;align-self:start;max-height:270px;overflow:hidden}.queue-head{display:flex;justify-content:space-between;font-size:12px;font-weight:750;margin:2px 0 11px}.queue-item{display:flex;align-items:center;gap:7px;padding:6px 3px;border-radius:8px;font-size:10px}.queue-item:first-of-type{background:#6d1bc788}.queue-item img{width:30px;height:30px;border-radius:7px;object-fit:cover}.queue-item div{min-width:0}.queue-item b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.queue-item small{color:var(--muted);font-size:9px}
+.chips{display:flex;gap:7px;overflow:auto;padding:12px 0 4px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{white-space:nowrap;border:1px solid #8d39c855;background:#18092cbb;border-radius:22px;padding:7px 13px;font-size:11px}.chip.active,.chip:hover{background:linear-gradient(90deg,#8e12ed,#4b1285);box-shadow:0 0 15px #b000ff77}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:15px 2px 9px}.section-head h2{font-size:17px;margin:0}.section-head a{font-size:11px;color:#d65cff}.cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}.card{min-width:0;border:1px solid #9d3ad477;border-radius:13px;padding:5px;background:linear-gradient(145deg,#281044cc,#10051cdd);box-shadow:0 4px 16px #0005;transition:.2s}.card:hover{transform:translateY(-3px);border-color:#e18bff;box-shadow:0 0 17px #a020ff55}.card img{width:100%;aspect-ratio:1.42;object-fit:cover;border-radius:9px;display:block}.card-info{display:flex;align-items:center;gap:5px;padding:6px 2px 2px}.card-info div{min-width:0;flex:1}.card-info b{display:block;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.card-info small{display:block;color:#c4afd8;font-size:9px;margin-top:3px}.play{width:25px;height:25px;flex:none;border-radius:50%;border:1px solid #f0baff;background:#260843;color:white;box-shadow:0 0 10px #a020ff77}
+.user-tracks{margin-top:18px}.empty{border:1px dashed #a34bd566;border-radius:12px;padding:14px;text-align:center;color:var(--muted);font-size:12px}
+.player{position:fixed;bottom:0;left:0;right:0;height:70px;z-index:10;display:grid;grid-template-columns:minmax(160px,1fr) minmax(210px,1.5fr) minmax(130px,1fr);align-items:center;gap:12px;padding:8px 16px;background:rgba(18,7,33,.91);border:1px solid #b14aff88;border-bottom:0;border-radius:17px 17px 0 0;backdrop-filter:blur(24px);box-shadow:0 -5px 30px #8b1bd344}.now{display:flex;align-items:center;gap:9px;min-width:0}.now img{width:45px;height:45px;object-fit:cover;border-radius:9px}.now b{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.now small{font-size:9px;color:var(--muted)}.controls{display:grid;justify-items:center;gap:4px}.buttons{display:flex;align-items:center;gap:20px}.buttons button{border:0;background:none;color:white;font-size:15px}.buttons .toggle{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#a000ff,#d000ff);box-shadow:0 0 17px #bd00ff}.progress{display:flex;align-items:center;gap:7px;width:100%;font-size:9px;color:#bda9d0}.progress input{width:100%;accent-color:#d000ff}.volume{display:flex;align-items:center;justify-content:flex-end;gap:8px;font-size:13px}.volume input{width:80px;accent-color:#d000ff}.file{display:none}
+@media(max-width:850px){.app{grid-template-columns:130px minmax(0,1fr)}.sidebar{padding:13px 7px}.cards{grid-template-columns:repeat(3,minmax(0,1fr))}.hero-row{grid-template-columns:minmax(0,1fr) 145px}.hero-content{padding:43px 19px}}
+@media(max-width:600px){body{padding-bottom:115px}.app{display:block}.sidebar{position:relative;height:auto;display:flex;flex-direction:row;align-items:center;padding:8px 10px;overflow:auto;border-right:0;border-bottom:1px solid var(--stroke)}.brand{font-size:14px;padding:0;white-space:nowrap}.brand-icon{font-size:22px}.nav{display:flex;gap:3px}.nav button{white-space:nowrap;padding:8px;font-size:10px}.nav button:nth-child(n+3),.playlist,.premium{display:none}main{padding:9px}.topbar{margin-bottom:8px}.hero-row{display:block;min-height:245px}.hero{min-height:245px;background-position:59% center}.hero-content{padding:35px 17px}.hero h1{font-size:42px}.tagline{font-size:13px}.queue{display:none}.chips{padding-top:9px}.cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.card{padding:4px}.card-info b{font-size:9px}.card-info small{font-size:8px}.play{width:22px;height:22px}.section-head h2{font-size:15px}.player{height:108px;grid-template-columns:1fr auto;gap:3px 8px;padding:7px 10px}.now{grid-column:1/-1}.now img{width:35px;height:35px}.controls{grid-column:1/-1;grid-row:2}.volume{display:none}.buttons{gap:24px}.buttons .toggle{width:30px;height:30px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><span class="brand-icon">♫</span><span>RUNAK<br>MUSIC</span></div>
+  <nav class="nav">
+    <button class="active" data-nav="home"><span class="ico">⌂</span>Home</button>
+    <button data-nav="search"><span class="ico">⌕</span>Search</button>
+    <button data-nav="library"><span class="ico">▣</span>Your Library</button>
+    <button data-nav="liked"><span class="ico">♡</span>Liked Songs</button>
+    <button data-nav="recent"><span class="ico">◷</span>Recently Played</button>
+    <button id="uploadNav"><span class="ico">⇩</span>Uploads</button>
+  </nav>
+  <div class="playlist"><div class="label">Playlists　＋</div>
+    <button data-cat="Romantic">💜　My Favorites</button><button data-cat="Romantic">💕　Romantic</button><button data-cat="Punjabi">🔥　Punjabi Vibes</button><button data-cat="Anime">⭐　Anime Music</button><button data-cat="Chill">🎧　Chill Vibes</button>
+  </div>
+  <div class="premium"><strong>👑 Upgrade to RUNAK Premium</strong>Get an ad-free experience<br><button>Go Premium ✨</button></div>
+</aside>
+<main>
+  <div class="topbar">
+    <label class="search">⌕ <input id="search" placeholder="Search songs, artists, or playlists..."></label>
+    <div class="top-right"><button class="circle" title="Display">☼</button><button class="circle" title="Notifications">♧</button><button class="circle" title="Profile">◉</button></div>
+  </div>
+  <div class="hero-row">
+    <section class="hero"><div class="hero-content"><div class="welcome">♬ Welcome to</div><h1>RUNAK <span>MUSIC</span></h1><div class="tagline">Feel the Music　•　Live the Vibes ♫</div><div class="hero-actions"><button class="primary" id="playNow">▶　Play Now</button><button class="outline" id="myPlaylist">♡　My Playlist</button></div></div></section>
+    <aside class="queue"><div class="queue-head">☷　Up Next <span>×</span></div>
+      <div class="queue-item"><img src="assets/cover-1.jpg"><div><b>Anime Vibes</b><small>RUNAK Mix</small></div>▮▮</div>
+      <div class="queue-item"><img src="assets/cover-2.jpg"><div><b>Love Forever</b><small>Romantic Mix</small></div></div>
+      <div class="queue-item"><img src="assets/cover-3.jpg"><div><b>Chill Beats</b><small>Night playlist</small></div></div>
+      <div class="queue-item"><img src="assets/cover-4.jpg"><div><b>Anime Theme</b><small>Anime Mix</small></div></div>
+      <div class="queue-item"><img src="assets/cover-5.jpg"><div><b>Japanese Vibes</b><small>Chill Mix</small></div></div>
+    </aside>
+  </div>
+  <div class="chips" id="chips"><button class="chip active" data-filter="All">▦　All</button><button class="chip" data-filter="Anime">🌸　Anime</button><button class="chip" data-filter="Punjabi">♫　Punjabi</button><button class="chip" data-filter="Romantic">♡　Love</button><button class="chip" data-filter="Chill">☕　Chill</button><button class="chip" data-filter="Workout">♜　Workout</button><button class="chip" data-filter="Trending">🔥　Trending</button><button class="chip" data-filter="Top Hits">⭐　Top Hits</button></div>
+  <div class="section-head"><h2>🔥 Trending Now</h2><a href="#" id="seeAll">See All →</a></div>
+  <section class="cards" id="featured">
+    <article class="card" data-demo="Anime"><img src="assets/cover-1.jpg"><div class="card-info"><div><b>Anime Vibes</b><small>♫ 1.2M plays</small></div><button class="play" aria-label="Play">▶</button></div></article>
+    <article class="card" data-demo="Romantic"><img src="assets/cover-2.jpg"><div class="card-info"><div><b>Love Forever</b><small>♫ 980K plays</small></div><button class="play">▶</button></div></article>
+    <article class="card" data-demo="Chill"><img src="assets/cover-3.jpg"><div class="card-info"><div><b>Chill Beats</b><small>♫ 2.1M plays</small></div><button class="play">▶</button></div></article>
+    <article class="card" data-demo="Anime"><img src="assets/cover-4.jpg"><div class="card-info"><div><b>Gojo Theme</b><small>♫ 1.8M plays</small></div><button class="play">▶</button></div></article>
+    <article class="card" data-demo="Chill"><img src="assets/cover-5.jpg"><div class="card-info"><div><b>Japanese Vibes</b><small>♫ 720K plays</small></div><button class="play">▶</button></div></article>
+    <article class="card" data-demo="Trending"><img src="assets/cover-6.jpg"><div class="card-info"><div><b>King Energy</b><small>♫ 1.5M plays</small></div><button class="play">▶</button></div></article>
+  </section>
+  <div class="section-head user-tracks"><h2 id="trackHeading">♫ Your uploaded music</h2><a id="addMusic" href="#">＋ Add music</a></div>
+  <section class="cards" id="userTracks"><div class="empty" style="grid-column:1/-1">Your music library is ready ✨ Upload MP3/audio files from your device to play them here.</div></section>
+  <input class="file" type="file" id="files" accept="audio/*" multiple>
+</main>
+</div>
+<footer class="player">
+  <div class="now"><img id="nowCover" src="assets/cover-1.jpg"><div style="min-width:0"><b id="nowTitle">RUNAK MUSIC</b><small id="nowArtist">Choose a track to start listening</small></div><span style="color:#bd37ff;margin-left:7px">♥</span></div>
+  <div class="controls"><div class="buttons"><button id="shuffle" title="Shuffle">⤨</button><button id="prev">|◀</button><button class="toggle" id="toggle">Ⅱ</button><button id="next">▶|</button><button id="repeat">↻</button></div><div class="progress"><span id="elapsed">0:00</span><input id="seek" type="range" min="0" max="100" value="0"><span id="total">0:00</span></div></div>
+  <div class="volume">◖ <input id="vol" type="range" min="0" max="1" step=".01" value=".8"> ☷　⛶</div>
+</footer>
+<script>
+const audio=new Audio();audio.volume=.8;let songs=[],index=-1,shuffle=false,repeat=false,filter='All';
+const $=s=>document.querySelector(s),fmt=n=>Number.isFinite(n)?Math.floor(n/60)+':'+String(Math.floor(n%60)).padStart(2,'0'):'0:00';
+function add(files){for(const f of files){if(!f.type.startsWith('audio/'))continue;songs.push({name:f.name.replace(/\.[^.]+$/,''),artist:'Your device',url:URL.createObjectURL(f)})}render();if(index<0&&songs.length)load(0,false)}
+function load(i,play=true){if(!songs.length)return;index=(i+songs.length)%songs.length;audio.src=songs[index].url;$('#nowTitle').textContent=songs[index].name;$('#nowArtist').textContent=songs[index].artist;$('#nowCover').src='assets/cover-'+((index%6)+1)+'.jpg';if(play)audio.play().catch(()=>{});$('#toggle').textContent='Ⅱ'}
+function render(){const q=$('#search').value.toLowerCase();let list=songs.map((s,i)=>({...s,i})).filter(s=>(filter==='All'||filter==='Uploads')&&(s.name+' '+s.artist).toLowerCase().includes(q));$('#userTracks').innerHTML=list.length?list.map(s=>`<article class="card"><img src="assets/cover-${s.i%6+1}.jpg"><div class="card-info"><div><b>${s.name.replace(/[&<>"]/g,'')}</b><small>Your device</small></div><button class="play" data-song="${s.i}">▶</button></div></article>`).join(''):'<div class="empty" style="grid-column:1/-1">Your uploaded tracks will appear here. Tap “Add music” to choose audio files.</div>'}
+$('#files').onchange=e=>{add(e.target.files);e.target.value=''};$('#addMusic').onclick=$('#uploadNav').onclick=()=>$('#files').click();
+$('#userTracks').onclick=e=>{let b=e.target.closest('[data-song]');if(b)load(+b.dataset.song)};
+$('#search').oninput=render;
+$('#chips').onclick=e=>{let b=e.target.closest('[data-filter]');if(!b)return;filter=b.dataset.filter;document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('active',x===b));$('#trackHeading').textContent=filter==='All'?'♫ Your uploaded music':'♫ '+filter+' music';render()};
+document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{filter=b.dataset.cat;render()});
+$('#playNow').onclick=()=>{if(songs.length)load(index<0?0:index);else $('#files').click()};
+$('#myPlaylist').onclick=()=>{$('#files').click()};
+$('#toggle').onclick=()=>{if(index<0){$('#files').click();return}if(audio.paused){audio.play();$('#toggle').textContent='Ⅱ'}else{audio.pause();$('#toggle').textContent='▶'}};
+$('#next').onclick=()=>songs.length&&load(shuffle?Math.floor(Math.random()*songs.length):index+1);
+$('#prev').onclick=()=>songs.length&&load(index-1);
+$('#shuffle').onclick=()=>{shuffle=!shuffle;$('#shuffle').style.color=shuffle?'#ed70ff':''};
+$('#repeat').onclick=()=>{repeat=!repeat;audio.loop=repeat;$('#repeat').style.color=repeat?'#ed70ff':''};
+audio.ontimeupdate=()=>{$('#elapsed').textContent=fmt(audio.currentTime);$('#total').textContent=fmt(audio.duration);$('#seek').value=audio.duration?audio.currentTime/audio.duration*100:0};
+$('#seek').oninput=e=>{if(audio.duration)audio.currentTime=audio.duration*e.target.value/100};
+audio.onended=()=>{if(!repeat&&songs.length)load(shuffle?Math.floor(Math.random()*songs.length):index+1)};
+$('#vol').oninput=e=>audio.volume=+e.target.value;
+document.querySelector('[data-nav="search"]').onclick=()=>$('#search').focus();
+document.querySelector('[data-nav="liked"]').onclick=()=>{$('#trackHeading').textContent='♡ Liked Songs';$('#files').click()};
+document.querySelector('[data-nav="library"]').onclick=()=>$('#files').click();
+document.querySelector('[data-nav="recent"]').onclick=()=>$('#files').click();
+$('#seeAll').onclick=e=>{e.preventDefault();$('#files').click()};
+</script>
+</body></html>
